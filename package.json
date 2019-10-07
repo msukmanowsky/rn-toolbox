@@ -1,0 +1,28 @@
+{
+  "name": "rn-toolbox",
+  "version": "1.0.0",
+  "description": "A collection of tools for my React Native projects.",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mike Sukmanowsky <mike.sukmanowsky@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.141",
+    "@types/react": "^16.9.5",
+    "@types/react-native": "^0.60.18",
+    "react": "^16.10.2",
+    "react-native": "^0.61.2",
+    "typescript": "^3.6.3"
+  },
+  "peerDependencies": {
+    "react": ">= 16.x",
+    "react-native": ">= 0.57.x"
+  }
+}
