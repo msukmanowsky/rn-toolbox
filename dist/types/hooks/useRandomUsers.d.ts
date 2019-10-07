@@ -65,6 +65,6 @@ interface RandomUserOptions {
     format?: "json" | "pretty" | "csv" | "yaml" | "xml";
     nationalities?: Nationality[];
 }
-declare const useRandomUsers: (options: RandomUserOptions) => RandomUser[];
+declare const useRandomUsers: ({ results, gender, format, apiVersion, passwords, seed, nationalities, }: RandomUserOptions) => RandomUser[];
 export default useRandomUsers;
 //# sourceMappingURL=useRandomUsers.d.ts.map

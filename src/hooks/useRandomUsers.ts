@@ -99,28 +99,27 @@ interface RandomUserOptions {
   format?: "json" | "pretty" | "csv" | "yaml" | "xml";
   nationalities?: Nationality[];
 }
-const defaultOptions: RandomUserOptions = {
-  results: 10,
-  gender: "any",
-  format: "json",
-  apiVersion: "1.3"
-};
 
-
-const useRandomUsers = (options: RandomUserOptions) => {
-  const finalOptions = { ...options, ...defaultOptions };
+const useRandomUsers = ({
+  results = 10,
+  gender = "any",
+  format = "json",
+  apiVersion = "1.3",
+  passwords,
+  seed,
+  nationalities,
+}: RandomUserOptions) => {
   const [users, setUsers] = useState<RandomUser[]>([]);
   useEffect(() => {
-    const query = queryString.stringify(
-      _.pick(finalOptions, [
-        "gender",
-        "passwords",
-        "format",
-        "nationalities",
-        "results"
-      ])
-    );
-    fetch(`https://randomuser.me/api/${finalOptions.apiVersion}/?${query}`)
+    const query = queryString.stringify({
+      gender,
+      passwords,
+      format,
+      nationalities,
+      results,
+      seed,
+    });
+    fetch(`https://randomuser.me/api/${apiVersion}/?${query}`)
       .then(response => response.json())
       .then(response => {
         const users = response.results as RandomUser[];
