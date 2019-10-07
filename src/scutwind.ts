@@ -457,13 +457,16 @@ function makeStyles(config: Partial<IConfig>) {
     );
   }
   getStyles.styles = styles;
+  getStyles.defaultConfig = defaultConfig;
   return getStyles;
 }
 
-let styles = makeStyles(defaultConfig);
+const styles = makeStyles(defaultConfig);
 
-Dimensions.addEventListener("change", () => {
-  styles = makeStyles(defaultConfig);
-});
+// Dimensions.addEventListener("change", () => {
+//   styles = makeStyles(defaultConfig);
+// });
 
-export { defaultConfig, styles };
+// export { defaultConfig, styles };
+
+export default styles;

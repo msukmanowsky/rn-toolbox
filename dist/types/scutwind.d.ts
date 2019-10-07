@@ -21,12 +21,12 @@ interface IConfig {
         [key: string]: number;
     };
 }
-declare const defaultConfig: IConfig;
-declare let styles: {
+declare const styles: {
     (styleOrStyles: string | string[]): any;
     styles: {
         [x: string]: any;
     };
+    defaultConfig: IConfig;
 };
-export { defaultConfig, styles };
+export default styles;
 //# sourceMappingURL=scutwind.d.ts.map
