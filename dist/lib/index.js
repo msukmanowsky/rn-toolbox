@@ -1,2 +1,3 @@
 import scutwind from "./scutwind";
-export { scutwind, };
+import * as hooks from "./hooks";
+export { scutwind, hooks, };
