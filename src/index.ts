@@ -1,4 +1,4 @@
-import * as scutwind from "./scutwind";
+import scutwind from "./scutwind";
 
 
 export {
