@@ -24,7 +24,7 @@ const useRandomUsers = (options) => {
             const users = response.results;
             setUsers(users);
         });
-    });
+    }, []);
     return users;
 };
 export default useRandomUsers;

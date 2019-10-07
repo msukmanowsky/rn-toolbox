@@ -126,7 +126,7 @@ const useRandomUsers = (options: RandomUserOptions) => {
         const users = response.results as RandomUser[];
         setUsers(users);
       });
-  });
+  }, []);
 
   return users;
 };
