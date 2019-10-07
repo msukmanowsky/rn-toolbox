@@ -4,9 +4,9 @@
         "declaration": true,
         "declarationMap": true,
         "declarationDir": "dist/types",
-        "target": "es5",
+        "target": "es6",
+        "module": "es6",
         "skipLibCheck": true,
-        "module": "commonjs",
         "strict": true,
         "allowSyntheticDefaultImports": true
     },

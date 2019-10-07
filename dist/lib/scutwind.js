@@ -1,22 +1,9 @@
-"use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Like Tailwind, but a lil more compact and intended for React Native.
  */
-var lodash_1 = require("lodash");
-var react_native_1 = require("react-native");
-var defaultConfig = {
+import _ from "lodash";
+import { StyleSheet, Dimensions } from "react-native";
+const defaultConfig = {
     rem: 16,
     breakpoints: {
         sm: 640,
@@ -185,59 +172,58 @@ var defaultConfig = {
         lg: 0.5
     }
 };
-exports.defaultConfig = defaultConfig;
 function makeStyles(config) {
-    var finalizedConfig = __assign(__assign({}, defaultConfig), config);
-    var rem = finalizedConfig.rem;
-    var _a = react_native_1.Dimensions.get("window"), windowWidth = _a.width, windowHeight = _a.height;
+    const finalizedConfig = Object.assign(Object.assign({}, defaultConfig), config);
+    const { rem } = finalizedConfig;
+    const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
     // Border radius
-    var borderRadius = lodash_1.default.chain(finalizedConfig.borderRadius)
-        .flatMap(function (relativeValue, name) {
-        var suffix = name === "default" ? "" : "-" + name;
+    const borderRadius = _.chain(finalizedConfig.borderRadius)
+        .flatMap((relativeValue, name) => {
+        const suffix = name === "default" ? "" : `-${name}`;
         return [
-            ["rounded" + suffix, { borderRadius: rem * relativeValue }],
+            [`rounded${suffix}`, { borderRadius: rem * relativeValue }],
             [
-                "rounded-t" + suffix,
+                `rounded-t${suffix}`,
                 {
                     borderTopLeftRadius: rem * relativeValue,
                     borderTopRightRadius: rem * relativeValue
                 }
             ],
             [
-                "rounded-b" + suffix,
+                `rounded-b${suffix}`,
                 {
                     borderBottomLeftRadius: rem * relativeValue,
                     borderBottomRightRadius: rem * relativeValue
                 }
             ],
             [
-                "rounded-l" + suffix,
+                `rounded-l${suffix}`,
                 {
                     borderBottomLeftRadius: rem * relativeValue,
                     borderTopLeftRadius: rem * relativeValue
                 }
             ],
             [
-                "rounded-r" + suffix,
+                `rounded-r${suffix}`,
                 {
                     borderBottomRightRadius: rem * relativeValue,
                     borderTopRightRadius: rem * relativeValue
                 }
             ],
             [
-                "rounded-tl" + suffix,
+                `rounded-tl${suffix}`,
                 { borderTopLeftRadius: rem * relativeValue }
             ],
             [
-                "rounded-tr" + suffix,
+                `rounded-tr${suffix}`,
                 { borderTopRightRadius: rem * relativeValue }
             ],
             [
-                "rounded-bl" + suffix,
+                `rounded-bl${suffix}`,
                 { borderBottomLeftRadius: rem * relativeValue }
             ],
             [
-                "rounded-br" + suffix,
+                `rounded-br${suffix}`,
                 { borderBottomRightRadius: rem * relativeValue }
             ]
         ];
@@ -245,24 +231,24 @@ function makeStyles(config) {
         .fromPairs()
         .value();
     // Margin and padding classes
-    var marginAndPadding = lodash_1.default.chain(finalizedConfig.spacing)
-        .flatMap(function (relativeValue, key) {
-        var value = rem * relativeValue;
+    const marginAndPadding = _.chain(finalizedConfig.spacing)
+        .flatMap((relativeValue, key) => {
+        const value = rem * relativeValue;
         return [
-            ["p-" + key, { padding: value }],
-            ["pt-" + key, { paddingTop: value }],
-            ["pb-" + key, { paddingBottom: value }],
-            ["pl-" + key, { paddingLeft: value }],
-            ["pr-" + key, { paddingRight: value }],
-            ["px-" + key, { paddingHorizontal: value }],
-            ["py-" + key, { paddingVertical: value }],
-            ["m-" + key, { margin: value }],
-            ["mt-" + key, { marginTop: value }],
-            ["mb-" + key, { marginBottom: value }],
-            ["ml-" + key, { marginLeft: value }],
-            ["mr-" + key, { marginRight: value }],
-            ["mx-" + key, { marginHorizontal: value }],
-            ["my-" + key, { marginVertical: value }]
+            [`p-${key}`, { padding: value }],
+            [`pt-${key}`, { paddingTop: value }],
+            [`pb-${key}`, { paddingBottom: value }],
+            [`pl-${key}`, { paddingLeft: value }],
+            [`pr-${key}`, { paddingRight: value }],
+            [`px-${key}`, { paddingHorizontal: value }],
+            [`py-${key}`, { paddingVertical: value }],
+            [`m-${key}`, { margin: value }],
+            [`mt-${key}`, { marginTop: value }],
+            [`mb-${key}`, { marginBottom: value }],
+            [`ml-${key}`, { marginLeft: value }],
+            [`mr-${key}`, { marginRight: value }],
+            [`mx-${key}`, { marginHorizontal: value }],
+            [`my-${key}`, { marginVertical: value }]
         ];
     })
         .concat([
@@ -297,37 +283,34 @@ function makeStyles(config) {
     ])
         .fromPairs()
         .value();
-    var fontSizes = lodash_1.default
+    const fontSizes = _
         .chain(finalizedConfig.fontSizes)
-        .map(function (size, name) { return ["text-" + name, { fontSize: rem * size }]; })
+        .map((size, name) => [`text-${name}`, { fontSize: rem * size }])
         .fromPairs()
         .value();
-    var letterSpacing = lodash_1.default
+    const letterSpacing = _
         .chain(finalizedConfig.letterSpacing)
-        .map(function (spacing, name) { return ["tracking-" + name, { letterSpacing: rem * spacing }]; })
+        .map((spacing, name) => [`tracking-${name}`, { letterSpacing: rem * spacing }])
         .fromPairs()
         .value();
-    var colors = lodash_1.default.chain(finalizedConfig.colors)
-        .flatMap(function (color, name) {
-        if (!lodash_1.default.isObject(color)) {
+    const colors = _.chain(finalizedConfig.colors)
+        .flatMap((color, name) => {
+        if (!_.isObject(color)) {
             return [[name, color]];
         }
-        return lodash_1.default.map(color, function (value, key) {
-            var suffix = key === "default" ? "" : "-" + key;
-            return ["" + name + suffix, value];
+        return _.map(color, (value, key) => {
+            const suffix = key === "default" ? "" : `-${key}`;
+            return [`${name}${suffix}`, value];
         });
     })
-        .flatMap(function (_a) {
-        var name = _a[0], color = _a[1];
-        return [
-            ["bg-" + name, { backgroundColor: color }],
-            ["border-" + name, { borderColor: color }],
-            ["text-" + name, { color: color }]
-        ];
-    })
+        .flatMap(([name, color]) => [
+        [`bg-${name}`, { backgroundColor: color }],
+        [`border-${name}`, { borderColor: color }],
+        [`text-${name}`, { color }]
+    ])
         .fromPairs()
         .value();
-    var textAlignment = {
+    const textAlignment = {
         "text-left": { textAlign: "left" },
         "text-center": { textAlign: "center" },
         "text-right": { textAlign: "right" },
@@ -336,12 +319,12 @@ function makeStyles(config) {
         "text-middle": { textAlignVertical: "center" },
         "text-top": { textAlignVertical: "top" }
     };
-    var textTransform = {
+    const textTransform = {
         uppercase: { textTransform: "uppercase" },
         lowercase: { textTransform: "lowercase" },
         capitalize: { textTransform: "capitalize" }
     };
-    var baseFontWeight = {
+    const baseFontWeight = {
         "font-hairline": 100,
         "font-thin": 200,
         "font-light": 300,
@@ -352,29 +335,29 @@ function makeStyles(config) {
         "font-extrabold": 800,
         "font-black": 900
     };
-    var fontWeight = lodash_1.default.chain(baseFontWeight)
-        .map(function (weight, name) { return [name, { fontWeight: "" + weight }]; })
+    const fontWeight = _.chain(baseFontWeight)
+        .map((weight, name) => [name, { fontWeight: `${weight}` }])
         .fromPairs()
         .value();
-    var flexDirection = {
+    const flexDirection = {
         "flex-row": { flexDirection: "row" },
         "flex-row-reverse": { flexDirection: "row-reverse" },
         "flex-col": { flexDirection: "column" },
         "flex-col-reverse": { flexDirection: "column-reverse" },
     };
-    var flexWrap = {
+    const flexWrap = {
         "flex-no-wrap": { flexWrap: "nowrap" },
         "flex-wrap": { flexWrap: "wrap" },
         "flex-wrap-reverse": { flexWrap: "wrap-reverse" },
     };
-    var alignItems = {
+    const alignItems = {
         "items-stretch": { alignItems: "stretch" },
         "items-start": { alignItems: "flex-start" },
         "items-center": { alignItems: "center" },
         "items-end": { alignItems: "flex-end" },
         "items-baseline": { alignItems: "baseline" },
     };
-    var justifyContent = {
+    const justifyContent = {
         "justify-start": { justifyContent: "flex-start" },
         "justify-center": { justifyContent: "center" },
         "justify-end": { justifyContent: "flex-end" },
@@ -382,7 +365,7 @@ function makeStyles(config) {
         "justify-around": { justifyContent: "space-around" },
         "justify-evenly": { justifyContent: "space-evenly" },
     };
-    var alignSelf = {
+    const alignSelf = {
         "self-auto": { alignSelf: "auto" },
         "self-start": { alignSelf: "flex-start" },
         "self-center": { alignSelf: "center" },
@@ -390,30 +373,30 @@ function makeStyles(config) {
         "self-stretch": { alignSelf: "stretch" },
         "self-baseline": { alignSelf: "baseline" },
     };
-    var flexGrow = {
+    const flexGrow = {
         "flex-grow": { flexGrow: 1 },
         "flex-grow-0": { flexGrow: 0 },
     };
-    var styles = react_native_1.StyleSheet.create(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({}, marginAndPadding), borderRadius), fontSizes), letterSpacing), textAlignment), textTransform), fontWeight), colors), flexDirection), flexWrap), alignItems), justifyContent), alignSelf), flexGrow));
+    const styles = StyleSheet.create(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, marginAndPadding), borderRadius), fontSizes), letterSpacing), textAlignment), textTransform), fontWeight), colors), flexDirection), flexWrap), alignItems), justifyContent), alignSelf), flexGrow));
     // Memoize since this is expensive
-    var styleKeys = lodash_1.default.keys(styles);
+    const styleKeys = _.keys(styles);
     function getStyles(styleOrStyles) {
-        if (lodash_1.default.isString(styleOrStyles)) {
+        if (_.isString(styleOrStyles)) {
             styleOrStyles = styleOrStyles.split(/\s+/);
         }
-        var notFound = lodash_1.default.difference(styleOrStyles, styleKeys);
+        const notFound = _.difference(styleOrStyles, styleKeys);
         if (notFound.length > 0) {
-            console.warn("No matching style(s) found for: " + notFound.join(", "));
+            console.warn(`No matching style(s) found for: ${notFound.join(", ")}`);
         }
-        return react_native_1.StyleSheet.flatten(lodash_1.default.chain(lodash_1.default.pick(styles, styleOrStyles))
+        return StyleSheet.flatten(_.chain(_.pick(styles, styleOrStyles))
             .values()
             .value());
     }
     getStyles.styles = styles;
     return getStyles;
 }
-var styles = makeStyles(defaultConfig);
-exports.styles = styles;
-react_native_1.Dimensions.addEventListener("change", function () {
-    exports.styles = styles = makeStyles(defaultConfig);
+let styles = makeStyles(defaultConfig);
+Dimensions.addEventListener("change", () => {
+    styles = makeStyles(defaultConfig);
 });
+export { defaultConfig, styles };
