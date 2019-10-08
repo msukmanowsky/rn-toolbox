@@ -91,24 +91,25 @@ type UserFields =
   | "picture"
   | "nat";
 interface RandomUserOptions {
-  results: number;
-  gender: Gender;
-  apiVersion: string;
-  passwords?: string;
-  seed?: string;
+  apiVersion?: string;
   format?: "json" | "pretty" | "csv" | "yaml" | "xml";
+  gender?: Gender;
   nationalities?: Nationality[];
+  passwords?: string;
+  results?: number;
+  seed?: string;
 }
 
-const useRandomUsers = ({
-  results = 10,
-  gender = "any",
-  format = "json",
-  apiVersion = "1.3",
-  passwords,
-  seed,
-  nationalities,
-}: RandomUserOptions) => {
+const useRandomUsers = (options: RandomUserOptions) => {
+  const {
+    apiVersion = "1.3",
+    format = "json",
+    gender = "any",
+    nationalities,
+    passwords,
+    results = 10,
+    seed,
+  } = options;
   const [users, setUsers] = useState<RandomUser[]>([]);
   useEffect(() => {
     const query = queryString.stringify({

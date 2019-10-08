@@ -1,2 +1,1 @@
-import useRandomUsers from "./useRandomUsers";
-export { useRandomUsers };
+export { default as useRandomUsers } from "./useRandomUsers";

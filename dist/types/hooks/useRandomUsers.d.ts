@@ -57,14 +57,14 @@ interface RandomUser {
 declare type Gender = "male" | "female" | "any";
 declare type Nationality = "AU" | "BR" | "CA" | "CH" | "DE" | "DK" | "ES" | "FI" | "FR" | "GB" | "IE" | "IR" | "NO" | "NL" | "NZ" | "TR" | "US";
 interface RandomUserOptions {
-    results: number;
-    gender: Gender;
-    apiVersion: string;
-    passwords?: string;
-    seed?: string;
+    apiVersion?: string;
     format?: "json" | "pretty" | "csv" | "yaml" | "xml";
+    gender?: Gender;
     nationalities?: Nationality[];
+    passwords?: string;
+    results?: number;
+    seed?: string;
 }
-declare const useRandomUsers: ({ results, gender, format, apiVersion, passwords, seed, nationalities, }: RandomUserOptions) => RandomUser[];
+declare const useRandomUsers: (options: RandomUserOptions) => RandomUser[];
 export default useRandomUsers;
 //# sourceMappingURL=useRandomUsers.d.ts.map
