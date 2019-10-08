@@ -293,7 +293,8 @@ function makeStyles(config) {
         .map((spacing, name) => [`tracking-${name}`, { letterSpacing: rem * spacing }])
         .fromPairs()
         .value();
-    const colors = _.chain(finalizedConfig.colors)
+    const flattenedColors = _
+        .chain(finalizedConfig.colors)
         .flatMap((color, name) => {
         if (!_.isObject(color)) {
             return [[name, color]];
@@ -303,6 +304,9 @@ function makeStyles(config) {
             return [`${name}${suffix}`, value];
         });
     })
+        .value();
+    const colors = _
+        .chain(flattenedColors)
         .flatMap(([name, color]) => [
         [`bg-${name}`, { backgroundColor: color }],
         [`border-${name}`, { borderColor: color }],
@@ -393,12 +397,9 @@ function makeStyles(config) {
             .value());
     }
     getStyles.styles = styles;
+    getStyles.colors = flattenedColors;
     getStyles.defaultConfig = defaultConfig;
     return getStyles;
 }
 const styles = makeStyles(defaultConfig);
-// Dimensions.addEventListener("change", () => {
-//   styles = makeStyles(defaultConfig);
-// });
-// export { defaultConfig, styles };
 export default styles;

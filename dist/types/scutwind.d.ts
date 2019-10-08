@@ -26,6 +26,7 @@ declare const styles: {
     styles: {
         [x: string]: any;
     };
+    colors: string[][];
     defaultConfig: IConfig;
 };
 export default styles;
