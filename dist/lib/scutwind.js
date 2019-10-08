@@ -397,7 +397,7 @@ function makeStyles(config) {
             .value());
     }
     getStyles.styles = styles;
-    getStyles.colors = flattenedColors;
+    getStyles.colors = _.fromPairs(flattenedColors);
     getStyles.defaultConfig = defaultConfig;
     return getStyles;
 }

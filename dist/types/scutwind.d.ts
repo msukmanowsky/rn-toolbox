@@ -1,3 +1,7 @@
+/**
+ * Like Tailwind, but a lil more compact and intended for React Native.
+ */
+import _ from "lodash";
 interface IConfig {
     rem: number;
     breakpoints: {
@@ -26,7 +30,7 @@ declare const styles: {
     styles: {
         [x: string]: any;
     };
-    colors: string[][];
+    colors: _.Dictionary<any>;
     defaultConfig: IConfig;
 };
 export default styles;
