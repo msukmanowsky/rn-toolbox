@@ -1,5 +1,5 @@
 {
-  "name": "rn-toolbox",
+  "name": "react-native-toolbox",
   "version": "1.0.0",
   "description": "A collection of tools for my React Native projects.",
   "main": "dist/lib/index",
