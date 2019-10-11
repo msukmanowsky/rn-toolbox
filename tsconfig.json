@@ -28,7 +28,6 @@
         "target": "esnext"
     },
     "exclude": [
-        "lib/**/*",
-        "src/**/*.test.ts"
+        "lib/**/*"
     ]
 }

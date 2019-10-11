@@ -30,15 +30,5 @@
   "peerDependencies": {
     "react": ">= 16.x",
     "react-native": ">= 0.57.x"
-  },
-  "release-it": {
-    "npm": {
-      "publish": false
-    },
-    "github": {
-      "release": true,
-      "releaseName": "Release ${version}",
-      "releaseNotes": null
-    }
   }
 }
