@@ -87,6 +87,10 @@ interface RandomUserOptions {
   seed?: string;
 }
 
+/**
+ * Get random users from the https://randomuser.me API.
+ * @param options See https://randomuser.me/documentation
+ */
 const useRandomUsers = (options: RandomUserOptions) => {
   const {
     apiVersion = "1.3",

@@ -6,6 +6,7 @@
   "types": "dist/types/index",
   "scripts": {
     "build": "rm -rf dist && tsc",
+    "docs": "typedoc",
     "test": "jest",
     "release": "release-it"
   },
@@ -25,6 +26,7 @@
     "react-native": "^0.61.2",
     "release-it": "^12.4.3",
     "ts-jest": "^24.1.0",
+    "typedoc": "^0.15.0",
     "typescript": "^3.6.3"
   },
   "peerDependencies": {

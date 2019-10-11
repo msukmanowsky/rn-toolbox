@@ -196,6 +196,16 @@ const defaultConfig: IConfig = {
   }
 };
 
+/**
+ * Factory method that creates scutwind from a configuration.
+ *
+ * ```typescript
+ * const Thing = () => (
+ *  <View style={sw("flex-grow mx-4 bg-gray-100")} />
+ * );
+ * ```
+ * @param config See defaultConfig for defaults.
+ */
 function makeScutwind(config: Partial<IConfig>) {
   const finalizedConfig: IConfig = { ...defaultConfig, ...config };
   const { rem } = finalizedConfig;

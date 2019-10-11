@@ -29,5 +29,13 @@
     },
     "exclude": [
         "lib/**/*"
-    ]
+    ],
+    "typedocOptions": {
+        "mode": "file",
+        "out": "docs",
+        "theme": "default",
+        "exclude": [
+            "*.test.ts"
+        ]
+    }
 }
