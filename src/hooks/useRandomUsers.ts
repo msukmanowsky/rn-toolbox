@@ -89,6 +89,10 @@ interface RandomUserOptions {
 
 /**
  * Get random users from the https://randomuser.me API.
+ *
+ * ```typescript
+ * const users = useRandomUsers();
+ * ```
  * @param options See https://randomuser.me/documentation
  */
 const useRandomUsers = (options: RandomUserOptions) => {
