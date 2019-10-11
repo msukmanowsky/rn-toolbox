@@ -77,19 +77,6 @@ type Nationality =
   | "NZ"
   | "TR"
   | "US";
-type UserFields =
-  | "gender"
-  | "name"
-  | "location"
-  | "email"
-  | "login"
-  | "registered"
-  | "dob"
-  | "phone"
-  | "cell"
-  | "id"
-  | "picture"
-  | "nat";
 interface RandomUserOptions {
   apiVersion?: string;
   format?: "json" | "pretty" | "csv" | "yaml" | "xml";
