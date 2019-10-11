@@ -3,5 +3,8 @@ module.exports = {
   preset: "react-native",
   modulePathIgnorePatterns: [
     "<rootDir>/dist",
+  ],
+  moduleDirectories: [
+    "node_modules"
   ]
 };
