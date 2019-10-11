@@ -4,7 +4,6 @@
 import _ from "lodash";
 import { StyleSheet, Dimensions, ViewStyle, TextStyle } from "react-native";
 
-
 interface IConfig {
   rem: number;
   breakpoints: {
@@ -197,10 +196,9 @@ const defaultConfig: IConfig = {
   }
 };
 
-function makeStyles(config: Partial<IConfig>) {
+function makeScutwind(config: Partial<IConfig>) {
   const finalizedConfig: IConfig = { ...defaultConfig, ...config };
   const { rem } = finalizedConfig;
-  const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
   // Border radius
   const borderRadius = _.chain(finalizedConfig.borderRadius)
@@ -236,14 +234,8 @@ function makeStyles(config: Partial<IConfig>) {
             borderTopRightRadius: rem * relativeValue
           }
         ],
-        [
-          `rounded-tl${suffix}`,
-          { borderTopLeftRadius: rem * relativeValue }
-        ],
-        [
-          `rounded-tr${suffix}`,
-          { borderTopRightRadius: rem * relativeValue }
-        ],
+        [`rounded-tl${suffix}`, { borderTopLeftRadius: rem * relativeValue }],
+        [`rounded-tr${suffix}`, { borderTopRightRadius: rem * relativeValue }],
         [
           `rounded-bl${suffix}`,
           { borderBottomLeftRadius: rem * relativeValue }
@@ -313,20 +305,20 @@ function makeStyles(config: Partial<IConfig>) {
     .fromPairs()
     .value();
 
-  const fontSizes = _
-    .chain(finalizedConfig.fontSizes)
+  const fontSizes = _.chain(finalizedConfig.fontSizes)
     .map((size, name) => [`text-${name}`, { fontSize: rem * size }])
     .fromPairs()
     .value();
 
-  const letterSpacing = _
-    .chain(finalizedConfig.letterSpacing)
-    .map((spacing, name) => [`tracking-${name}`, { letterSpacing: rem * spacing }])
+  const letterSpacing = _.chain(finalizedConfig.letterSpacing)
+    .map((spacing, name) => [
+      `tracking-${name}`,
+      { letterSpacing: rem * spacing }
+    ])
     .fromPairs()
     .value();
 
-  const flattenedColors = _
-    .chain(finalizedConfig.colors)
+  const flattenedColors = _.chain(finalizedConfig.colors)
     .flatMap((color, name) => {
       if (!_.isObject(color)) {
         return [[name, color]];
@@ -339,8 +331,9 @@ function makeStyles(config: Partial<IConfig>) {
     })
     .value();
 
-  const colors: { [key: string]: ViewStyle | TextStyle } = _
-    .chain(flattenedColors)
+  const colors: { [key: string]: ViewStyle | TextStyle } = _.chain(
+    flattenedColors
+  )
     .flatMap(([name, color]) => [
       [`bg-${name}`, { backgroundColor: color }],
       [`border-${name}`, { borderColor: color }],
@@ -385,13 +378,13 @@ function makeStyles(config: Partial<IConfig>) {
     "flex-row": { flexDirection: "row" },
     "flex-row-reverse": { flexDirection: "row-reverse" },
     "flex-col": { flexDirection: "column" },
-    "flex-col-reverse": { flexDirection: "column-reverse" },
+    "flex-col-reverse": { flexDirection: "column-reverse" }
   };
 
   const flexWrap: { [key: string]: ViewStyle } = {
     "flex-no-wrap": { flexWrap: "nowrap" },
     "flex-wrap": { flexWrap: "wrap" },
-    "flex-wrap-reverse": { flexWrap: "wrap-reverse" },
+    "flex-wrap-reverse": { flexWrap: "wrap-reverse" }
   };
 
   const alignItems: { [key: string]: ViewStyle } = {
@@ -399,30 +392,30 @@ function makeStyles(config: Partial<IConfig>) {
     "items-start": { alignItems: "flex-start" },
     "items-center": { alignItems: "center" },
     "items-end": { alignItems: "flex-end" },
-    "items-baseline": { alignItems: "baseline" },
+    "items-baseline": { alignItems: "baseline" }
   };
 
   const justifyContent: { [key: string]: ViewStyle } = {
-    "justify-start": { justifyContent: "flex-start"},
-    "justify-center": { justifyContent: "center"},
-    "justify-end": { justifyContent: "flex-end"},
-    "justify-between": { justifyContent: "space-between"},
-    "justify-around": { justifyContent: "space-around"},
-    "justify-evenly": { justifyContent: "space-evenly"},
+    "justify-start": { justifyContent: "flex-start" },
+    "justify-center": { justifyContent: "center" },
+    "justify-end": { justifyContent: "flex-end" },
+    "justify-between": { justifyContent: "space-between" },
+    "justify-around": { justifyContent: "space-around" },
+    "justify-evenly": { justifyContent: "space-evenly" }
   };
 
   const alignSelf: { [key: string]: ViewStyle } = {
-    "self-auto": { alignSelf: "auto"},
-    "self-start": { alignSelf: "flex-start"},
-    "self-center": { alignSelf: "center"},
-    "self-end": { alignSelf: "flex-end"},
-    "self-stretch": { alignSelf: "stretch"},
-    "self-baseline": { alignSelf: "baseline"},
+    "self-auto": { alignSelf: "auto" },
+    "self-start": { alignSelf: "flex-start" },
+    "self-center": { alignSelf: "center" },
+    "self-end": { alignSelf: "flex-end" },
+    "self-stretch": { alignSelf: "stretch" },
+    "self-baseline": { alignSelf: "baseline" }
   };
 
   const flexGrow: { [key: string]: ViewStyle } = {
     "flex-grow": { flexGrow: 1 },
-    "flex-grow-0": { flexGrow: 0},
+    "flex-grow-0": { flexGrow: 0 }
   };
 
   const styles = StyleSheet.create({
@@ -440,33 +433,51 @@ function makeStyles(config: Partial<IConfig>) {
     ...alignItems,
     ...justifyContent,
     ...alignSelf,
-    ...flexGrow,
+    ...flexGrow
   });
   // Memoize since this is expensive
   const styleKeys = _.keys(styles);
 
-  function getStyles(styleOrStyles: string | string[]) {
+  const matchingBreakpoints = () => {
+    const { width } = Dimensions.get("window");
+    return _.pickBy(finalizedConfig.breakpoints, minWidth => width >= minWidth);
+  };
+
+  function scutwind(styleOrStyles: string | string[]) {
+    let stylez: string[] = [];
     if (_.isString(styleOrStyles)) {
-      styleOrStyles = styleOrStyles.split(/\s+/);
+      stylez = styleOrStyles.split(/\s+/);
     }
 
-    const notFound = _.difference(styleOrStyles, styleKeys);
+    const currentBreakpoints = matchingBreakpoints();
+    stylez = _.flatMap(stylez, style => {
+      const parts = style.split(":");
+      // No prefix
+      if (parts.length !== 2) return [style];
+      const [breakpointName, actualStyle] = parts;
+      if (_.has(currentBreakpoints, breakpointName)) {
+        return [actualStyle];
+      }
+      return [];
+    });
+
+    const notFound = _.difference(stylez, styleKeys);
     if (notFound.length > 0) {
       console.warn(`No matching style(s) found for: ${notFound.join(", ")}`);
     }
 
     return StyleSheet.flatten(
-      _.chain(_.pick(styles, styleOrStyles))
+      _.chain(_.pick(styles, stylez))
         .values()
         .value()
     );
   }
-  getStyles.styles = styles;
-  getStyles.colors = _.fromPairs(flattenedColors);
-  getStyles.defaultConfig = defaultConfig;
-  return getStyles;
+
+  scutwind.styles = styles;
+  scutwind.colors = _.fromPairs(flattenedColors);
+  return scutwind;
 }
 
-const styles = makeStyles(defaultConfig);
+const scutwind = makeScutwind(defaultConfig);
 
-export default styles;
+export { defaultConfig, scutwind as default };
