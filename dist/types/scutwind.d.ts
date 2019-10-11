@@ -25,13 +25,13 @@ interface IConfig {
         [key: string]: number;
     };
 }
-declare const styles: {
+declare const defaultConfig: IConfig;
+declare const scutwind: {
     (styleOrStyles: string | string[]): any;
     styles: {
         [x: string]: any;
     };
     colors: _.Dictionary<any>;
-    defaultConfig: IConfig;
 };
-export default styles;
+export { defaultConfig, scutwind as default };
 //# sourceMappingURL=scutwind.d.ts.map
