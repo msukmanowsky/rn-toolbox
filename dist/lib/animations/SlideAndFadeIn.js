@@ -65,9 +65,35 @@ export default class SlideAndFadeIn extends React.Component {
             this.value.setValue(0);
         };
         this.value = new Animated.Value(0);
+        const { slideBy, direction } = props;
+        switch (direction) {
+            case "up":
+                this.state = {
+                    property: "translateY",
+                    outputRange: [-slideBy, 0]
+                };
+                break;
+            case "down":
+                this.state = {
+                    property: "translateY",
+                    outputRange: [slideBy, 0]
+                };
+                break;
+            case "right":
+                this.state = {
+                    property: "translateX",
+                    outputRange: [-slideBy, 0]
+                };
+                break;
+            case "left":
+                this.state = {
+                    property: "translateX",
+                    outputRange: [slideBy, 0]
+                };
+                break;
+        }
     }
     componentDidMount() {
-        this._updateTransforms();
         if (this.props.autoRun) {
             this.animate();
         }
