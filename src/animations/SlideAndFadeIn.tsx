@@ -10,7 +10,6 @@ interface DefaultProps {
 }
 
 export interface SlideAndFadeInProps extends ViewProps, DefaultProps {
-  scale: number;
   children?: ReactNode[];
 }
 
