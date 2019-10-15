@@ -70,13 +70,13 @@ export default class SlideAndFadeIn extends React.Component {
             case "up":
                 this.state = {
                     property: "translateY",
-                    outputRange: [-slideBy, 0]
+                    outputRange: [slideBy, 0]
                 };
                 break;
             case "down":
                 this.state = {
                     property: "translateY",
-                    outputRange: [slideBy, 0]
+                    outputRange: [-slideBy, 0]
                 };
                 break;
             case "right":
