@@ -7,7 +7,7 @@ interface DefaultProps {
 }
 export interface PulseProps extends ViewProps, DefaultProps {
     scale: number;
-    children?: ReactNode[];
+    children?: ReactNode | ReactNode[];
 }
 interface State {
     value: Animated.Value<number>;
