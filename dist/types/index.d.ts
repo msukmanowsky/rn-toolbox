@@ -1,4 +1,5 @@
 import scutwind from "./scutwind";
 import * as hooks from "./hooks";
-export { scutwind, hooks, };
+import * as animations from "./animations";
+export { animations, hooks, scutwind, };
 //# sourceMappingURL=index.d.ts.map

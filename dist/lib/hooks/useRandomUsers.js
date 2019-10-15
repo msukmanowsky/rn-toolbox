@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
 import queryString from "query-string";
+/**
+ * Get random users from the https://randomuser.me API.
+ *
+ * ```typescript
+ * const users = useRandomUsers();
+ * ```
+ * @param options See https://randomuser.me/documentation
+ */
 const useRandomUsers = (options) => {
     const { apiVersion = "1.3", format = "json", gender = "any", nationalities, passwords, results = 10, seed, } = options;
     const [users, setUsers] = useState([]);

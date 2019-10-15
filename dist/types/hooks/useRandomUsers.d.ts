@@ -65,6 +65,14 @@ interface RandomUserOptions {
     results?: number;
     seed?: string;
 }
+/**
+ * Get random users from the https://randomuser.me API.
+ *
+ * ```typescript
+ * const users = useRandomUsers();
+ * ```
+ * @param options See https://randomuser.me/documentation
+ */
 declare const useRandomUsers: (options: RandomUserOptions) => RandomUser[];
 export default useRandomUsers;
 //# sourceMappingURL=useRandomUsers.d.ts.map
