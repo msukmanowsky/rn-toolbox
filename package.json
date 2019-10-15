@@ -1,6 +1,6 @@
 {
   "name": "react-native-toolbox",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A collection of tools for my React Native projects.",
   "main": "dist/lib/index",
   "types": "dist/types/index",
