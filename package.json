@@ -24,6 +24,7 @@
     "jest": "^24.9.0",
     "react": "^16.10.2",
     "react-native": "^0.61.2",
+    "react-native-reanimated": "^1.3.0",
     "release-it": "^12.4.3",
     "ts-jest": "^24.1.0",
     "typedoc": "^0.15.0",
@@ -31,6 +32,7 @@
   },
   "peerDependencies": {
     "react": ">= 16.x",
-    "react-native": ">= 0.57.x"
+    "react-native": ">= 0.57.x",
+    "react-native-reanimated": "~1.3.0"
   }
 }
