@@ -65,9 +65,9 @@ export default class SlideAndFadeIn extends React.Component {
             this.value.setValue(0);
         };
         this.value = new Animated.Value(0);
-        this._updateTransforms();
     }
     componentDidMount() {
+        this._updateTransforms();
         if (this.props.autoRun) {
             this.animate();
         }
