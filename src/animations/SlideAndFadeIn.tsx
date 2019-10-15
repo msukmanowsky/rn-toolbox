@@ -55,6 +55,7 @@ export default class SlideAndFadeIn extends React.Component<
   constructor(props: SlideAndFadeInProps) {
     super(props);
     this.value = new Animated.Value(0);
+    this._updateTransforms();
   }
 
   animate = () => {
